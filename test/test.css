@@ -1,0 +1,13 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: blue;
+}
+
+.ok {
+    background-color: lightgreen;
+    color: darkgreen;
+}
+.error {
+    background-color: pink;
+    color: darkred;
+}
