@@ -9,5 +9,3 @@ try {
     echo $e->getMessage();
     echo "</p>";
 }
-
-exit;
