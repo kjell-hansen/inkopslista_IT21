@@ -59,10 +59,16 @@ function aterstallDB($varor): void
     }
 }
 
-function idSaknas($curlHandle)
+function idSaknas($curlHandle, string $vara = null)
 {
     // Sätt anropsmetod till POST
     curl_setopt($curlHandle, CURLOPT_POST, true);
+
+    // Sätt optional data....
+    if ($vara) {
+        $data = ['vara' => $vara];
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
+    }
 
     // Anropa och ta hand om svaret 
     $jsonSvar = curl_exec($curlHandle);
@@ -75,7 +81,7 @@ function idSaknas($curlHandle)
         echo "<p class='error'>Svar med status=$status istället för förväntat 400</p>";
     }
 }
-function idFinnsInte($curlHandle)
+function idFinnsInte($curlHandle, string $vara = null)
 {
     // Koppla mot databas
     $db = connectDB();
@@ -91,6 +97,11 @@ function idFinnsInte($curlHandle)
 
     // Lägg data till anropet
     $data = ['id' => $id];
+
+    // Lägg till optional data
+    if ($vara) {
+        $data['vara'] = $vara;
+    }
     curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
 
     // Skicka anrop
@@ -104,13 +115,19 @@ function idFinnsInte($curlHandle)
         echo "<p class='error'>Fick status=$status istället för förväntat 400</p>";
     }
 }
-function idNegativt($curlHandle)
+function idNegativt($curlHandle, string $vara = null)
 {
     // Sätt anropsmetod till POST
     curl_setopt($curlHandle, CURLOPT_POST, true);
 
     // Lägg till data till anropet
     $data = ['id' => -1];
+
+    // Sätt optional data....
+    if ($vara) {
+        $data['vara'] = $vara;
+    }
+
     curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
 
     // Skicka anrop 
@@ -124,13 +141,18 @@ function idNegativt($curlHandle)
         echo "<p class='error'>Fick status=$status istället för förväntat 400</p>";
     }
 }
-function idBokstav($curlHandle)
+function idBokstav($curlHandle, string $vara = null)
 {
     // Sätt anropsmetod till POST
     curl_setopt($curlHandle, CURLOPT_POST, true);
 
     // Lägg till data till anropet
     $data = ['id' => "id"];
+    // Sätt optional data....
+    if ($vara) {
+        $data['vara'] = $vara;
+    }
+
     curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
 
     // Skicka anrop 
