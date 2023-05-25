@@ -105,16 +105,3 @@ function varaSaknas($curlHandle)
         echo "<p class='error'>Fick status=$status istället för förväntat 400</p>";
     }
 }
-function felMetod($curlHandle)
-{
-    // Gör anrop och ta hand om retursträngen
-    $jsonSvar = curl_exec($curlHandle);
-    // Hämta status för anropet
-    $status = curl_getinfo($curlHandle, CURLINFO_RESPONSE_CODE);
-
-    if ($status === 405) {
-        echo "<p class='ok'>Svar 405 stämmer med förväntat svar</p>";
-    } else {
-        echo "<p class='error'>Fick status=$status istället för förväntat 405</p>";
-    }
-}
